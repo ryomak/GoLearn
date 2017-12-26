@@ -1,3 +1,4 @@
-./vendor/
-./Godeps/
+vendor
+Godeps
 .DS_Store
+client/node_nodules
