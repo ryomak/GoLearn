@@ -1,17 +1,18 @@
 package main
 
 import "os"
-import "time"
 import "encoding/json"
 import "log"
 import "github.com/gorilla/mux"
 import "github.com/urfave/negroni"
 import "net/http"
+import "time"
 
 type Article struct {
 	Title string    `json:"title"`
 	Url   string    `json:"url"`
-	Date  time.Time `json:"date"`
+	Like  int       `json:"likes_count"`
+	Date  time.Time `json:"created_at"`
 }
 
 type Articles []Article
@@ -35,7 +36,7 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	if page == "" {
 		page = "1"
 	}
-	url := "https://qiita.com/api/v2/items?query=go&per_page=20&page=" + page
+	url := "https://qiita.com/api/v2/tags/Go/items?per_page=30&page=" + page
 	articles := []Article{}
 	if err := getJson(url, &articles); err != nil {
 		log.Printf("%v", err)
