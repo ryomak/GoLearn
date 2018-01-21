@@ -1,7 +1,7 @@
 PORT:=8080
 
 run:
-	godep go build -o ./main ./main.go 
+	go build -o ./main ./main.go 
 	./main $(PORT)
 
 install:
