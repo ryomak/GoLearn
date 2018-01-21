@@ -15,7 +15,7 @@ export default class Home  extends React.Component{
 		this.fetchData()
 	}	
 	fetchData(){
-		fetch("http://localhost:8080/api/1")
+		fetch("api/1")
 		.then((response) => response.json())
 		.then((responseData) => {
 			this.setState({
