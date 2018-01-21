@@ -20,7 +20,10 @@ type Articles []Article
 func main() {
 	port := os.Getenv("PORT")
 	r := mux.NewRouter()
+	r.HandleFunc("/", Index)
 	r.HandleFunc("/api/{page}", IndexHandler)
+
+	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("public"))))
 
 	//negroni
 	n := negroni.New()
@@ -58,4 +61,8 @@ func getJson(url string, target interface{}) error {
 		return err
 	}
 	return json.NewDecoder(resp.Body).Decode(target)
+}
+
+func Index(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "index.html")
 }
