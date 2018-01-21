@@ -18,7 +18,7 @@ type Article struct {
 type Articles []Article
 
 func main() {
-	port := os.Args[1]
+	port := os.Getenv("PORT")
 	r := mux.NewRouter()
 	r.HandleFunc("/api/{page}", IndexHandler)
 
